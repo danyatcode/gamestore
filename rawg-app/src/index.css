@@ -1,0 +1,150 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #111111;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+#root {
+  max-width: 95%;
+  min-height: 100vh;
+  width: 1440px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+.App{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+/* Header */
+.header{
+  margin-bottom: auto;
+  background-color: #1e1e1e;
+  padding: 20px 0px;
+}
+.menu{
+  display: flex;
+  gap: 0px 30px;
+  margin: 0px 30px;
+}
+/* Item List */
+.item-list{
+  margin: 0 auto;
+  margin-top: 100px;
+  max-width: 1240px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px 0;
+}
+.loading{
+  position: fixed;
+  inset: 0;
+  display: flex;
+
+  font-size: 30px;
+
+  align-items: center;
+  justify-content: center;
+
+  background-color: #111111;
+}
+img{
+  object-fit: cover;
+  height: auto;
+  max-width: 100%;
+  aspect-ratio: 16/9;
+}
+.item-img-div{
+  width: 45%;
+}
+.item{
+  width: 100%;
+  display: flex;
+  gap: 0px 40px;
+  margin: 30px 0px;
+  cursor: pointer;
+  transition: 350ms;
+}
+.item-img{
+  transition: 350ms;
+}
+.item:hover .item-img{
+  opacity: 0.9;
+}
+.item:hover{
+  transform: translateY(-10px);
+  opacity: 0.9;
+}
+.item-info{
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+  align-items: start;
+}
+.item-title{
+  font-size: 2.1rem;
+  font-weight: 400;
+  margin: 0;
+  margin-bottom: 0.5em;
+}
+.item-genres{
+  color: #D1A228;
+  font-weight: 500;
+}
+.item-platforms{
+  display: flex;
+  gap: 0px 30px;
+  font-size: 40px;
+  color: #ffffff;
+}
+.item-platforms svg{
+  cursor: pointer;
+  transition: 350ms;
+  padding: 15px;
+  border-radius: 15px;
+}
+.item-platforms svg:hover{
+  background-color: #000000b0;
+  border-radius: 15px;
+}
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

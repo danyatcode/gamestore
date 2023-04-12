@@ -1,0 +1,5 @@
+export const ActionTypes = {
+    SET_LIST: "SET_LIST",
+    SELECTED_GAME: "SELECTED_GAME",
+    REMOVE_SELECTED_GAME: "REMOVE_SELECTED_GAME",
+}
