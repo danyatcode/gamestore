@@ -1,6 +1,6 @@
 import { Action } from "redux";
 import { ActionTypes } from "../constants/action-types";
-import { DataProps } from "../constants/types";
+import { DataProps, SelectedGame } from "../constants/types";
 
 
 interface IState {
@@ -19,7 +19,7 @@ interface IGamesAction extends Action {
 
 interface SelectedGameAction extends Action{
     type: string,
-    payload: DataProps
+    payload: SelectedGame
 }
 
 
