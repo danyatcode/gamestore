@@ -8,10 +8,20 @@ import { BsNintendoSwitch, BsSteam, BsXbox } from 'react-icons/bs'
 import { RiComputerLine } from 'react-icons/ri'
 import { SiPlaystation2, SiPlaystation3, SiPlaystation4, SiPlaystation5 } from 'react-icons/si'
 import {TbBrandXbox } from 'react-icons/tb'
+import Game from './Game'
 
 const SelectedGame = ():JSX.Element => {
     const [gamesData, setGamesData] = React.useState<DataProps[]>()
 
+    const [totalImages, setTotalImages] = React.useState<number>(0);
+
+    const [loadedImg, setLoadedImg] = React.useState<number>(0);
+
+    const handleImageLoad = () => {
+            setLoadedImg((prevCount) => prevCount + 1);
+    }
+
+    
     const game = useSelector((state: State) => state.selectedGame);
 
     const { gameID } = useParams();
@@ -31,7 +41,8 @@ const SelectedGame = ():JSX.Element => {
         try{
             const res = await axios.get(`https://api.rawg.io/api/games?key=242593db55b54d9089bab37814ec14a4&page=4&page_size=20`) as AxiosResponse;    
             const data = res.data;
-            setGamesData(data.results)
+            setGamesData(data.results);
+            setTotalImages(data.results[0].short_screenshots.length + 1);
         } catch(error){
             console.error(error)
         }
@@ -46,12 +57,13 @@ const SelectedGame = ():JSX.Element => {
         }
     }, [gameID])
 
-    const gallery = gamesData?.filter(res => res.name === game.name)[0]?.short_screenshots?.map( (screenshot, i) => <a key={i} href={screenshot.image} target="value"><img  src={screenshot.image} alt="game screenshot" /></a>);
+    const gallery = gamesData?.filter(res => res.name === game.name)[0]?.short_screenshots?.map( (screenshot, i) => <a key={i} href={screenshot.image} target="value">
+        <img  src={screenshot.image} alt="game screenshot" onLoad={handleImageLoad}/>
+    </a>);
+
     const genres = game?.genres?.map( genre => genre.name).join(', ');
     const developers = game?.developers?.map( developer => developer.name).join(', ');
     const descriptArray = game?.description_raw?.split('.');
-
-    console.log(gallery)
 
     let descr = '';
 
@@ -86,42 +98,17 @@ const SelectedGame = ():JSX.Element => {
     });
 
   return (
-    <div className='game'>
-        <div className='row'>
-            <div className='selected-game-img-div'>
-                <img loading='lazy' alt={game.name} src={game.background_image} className='selected-game-image'/>
-            </div>
-            <div className='selected-game-info'>
-                <h1 className='game-title'>{game.name}</h1>
-                <div className='game-genres'>
-                    Genres: <span>{genres}</span>
-                </div>
-                <div className='game-developers'>
-                    Developed: <span>{developers}</span>
-                </div>
-                <div className='game-released'>
-                    Release: <span>{game.released}</span>
-                </div>
-        
-                <span className='platforms-title title'>Available On Platforms</span>
-                <div className='item-platforms selected-game-platforms' style={{display: "flex", justifyContent: "center"}}>
-                    {platforms}
-                </div>
-            </div>
-        </div>
-
-        <div className='gallery'>{gallery}</div>
-
-        <h2 className='description-title title'>Description </h2>
-
-        <p className={`selected-game-descr`}></p>
-
-        <h2 className='description-title title'>Store</h2>
-
-        <p className={`selected-game-store`}>{store}</p>
-
-        
-    </div>
+    <Game 
+        store={store} 
+        game={game} 
+        genres={genres} 
+        developers={developers} 
+        platforms={platforms} 
+        gallery={gallery}
+        handleImageLoad={handleImageLoad}
+        loadedImg={loadedImg}
+        totalImages={totalImages}
+    />
   )
 }
 

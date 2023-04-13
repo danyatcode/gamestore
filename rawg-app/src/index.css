@@ -42,6 +42,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  scroll-behavior: smooth;
 }
 /* Header */
 .header{
@@ -161,7 +162,8 @@ img{
   margin-bottom: 0.5em;
   font-weight: 500;
   color: #D2D2E2;
-  transition: 350ms ;
+  transition: 350ms;
+  text-align: left;
 }
 .item-genres{
   color: #D1A228;

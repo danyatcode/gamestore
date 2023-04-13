@@ -14,7 +14,6 @@ import { SiPlaystation2, SiPlaystation3, SiPlaystation4, SiPlaystation5 } from '
 const Home = (): JSX.Element => {
 
     const [totalImages, setTotalImages] = useState<number>(0);
-
     const [loadedImg, setLoadedImg] = useState<number>(0);
 
     const games = useSelector<State, List>((state: State) => state.games)
