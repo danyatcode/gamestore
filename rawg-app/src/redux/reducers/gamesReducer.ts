@@ -46,6 +46,6 @@ export const selectedGameReducer = (state: any = {}, {type, payload}: SelectedGa
 export const queryReducer = (state: any = {}, {type, payload}: queryAction) => {
     switch(type){
         case ActionTypes.SET_QUERY: return {...state , searchQuery: payload}
-        default: return state
+        default: return {...state , searchQuery: ""}
     }
 }

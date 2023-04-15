@@ -1,15 +1,37 @@
-import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
-import { setQuery } from '../redux/actions/game-actions';
+import { setGames, setQuery } from '../redux/actions/game-actions';
 import  { FiSearch } from 'react-icons/fi'
+import { State } from '../redux/constants/types'
+import React from 'react';
+import axios, { AxiosResponse } from 'axios';
+
 const Header = (): JSX.Element => {
   
     const dispatch = useDispatch();
-    const page = useLocation();
-    console.log(page) 
-    const queryValue = useSelector((state) => state.query.searchQuery);
+    
+    const queryValue: string = useSelector<State>(
+      (state) => state.query.searchQuery 
+    ) as string;
 
+    const page = useLocation().pathname;
+    const query = useSelector<State>((state) => state.query.searchQuery)
+
+    const fetchData = async() => {
+      try{
+          const res = await axios.get("https://api.rawg.io/api/games?search="+ query +"&key=242593db55b54d9089bab37814ec14a4") as AxiosResponse;    
+          const data = res.data;
+
+          dispatch(setGames(data));
+      } catch(error){
+          console.error(error)
+      }
+  }
+    const handleClick = () => {
+      if(page.includes("/games/search")){
+        fetchData()
+      }
+    }
 
   return (
     <div className='header'>
@@ -49,10 +71,10 @@ const Header = (): JSX.Element => {
                 className='input' 
                 placeholder='Search game' 
                 type='text' 
-                value={queryValue || ""}
+                value={queryValue}
                 onChange={(e) => dispatch(setQuery(e.target.value))}
               />
-              <Link className='search-loop' to="games/search" ><FiSearch /></Link>
+              <Link className='search-loop' to="games/search" onClick={handleClick}><FiSearch /></Link>
             </div>
             
         </ul>

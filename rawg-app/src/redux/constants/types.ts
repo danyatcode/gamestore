@@ -13,6 +13,10 @@ export type DataProps = {
 export type State = {
     games: List,
     selectedGame: SelectedGame,
+    query: searchQuery
+}
+interface searchQuery{
+    searchQuery: string | number | readonly string[] | undefined,
 }
 
 export type List = {

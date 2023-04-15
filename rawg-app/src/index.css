@@ -95,7 +95,22 @@ body {
 }
 .search{
   margin-right: 100px;
-  padding: 5px 8px;
+  padding: 5px 7px;
+  display: flex;
+  align-items: center;
+}
+.search-loop{
+  color: #Fff;
+  font-size: 24px;
+  padding: 3px;
+  background-color: #3b3b3b;
+  transition: 250ms;
+  display: flex;
+  align-items: center;
+}
+.search-loop:hover{
+  color: #Fff;
+  opacity: 0.5;
 }
 #input::placeholder{
   font-size: 14px;

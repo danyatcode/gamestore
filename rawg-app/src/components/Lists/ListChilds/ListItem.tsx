@@ -1,7 +1,7 @@
 import React from 'react'
-import { DataProps } from '../redux/constants/types'
+import { DataProps } from '../../../redux/constants/types'
 import { Link } from 'react-router-dom'
-import { selectedGame } from '../redux/actions/game-actions'
+import { selectedGame } from '../../../redux/actions/game-actions'
 import { AnyAction, Dispatch } from 'redux'
 import { IoStarSharp } from 'react-icons/io5'
 
@@ -17,7 +17,7 @@ type Game = {
 }
 
 
-const ListGame = ({game, platforms, dispatch, genres, handleImageLoad}: Game) => {
+const ListItem = ({game, platforms, dispatch, genres, handleImageLoad}: Game) => {
 
   return (
     <div className='item'>
@@ -45,4 +45,5 @@ const ListGame = ({game, platforms, dispatch, genres, handleImageLoad}: Game) =>
   )
 }
 
-export default ListGame
+
+export default ListItem

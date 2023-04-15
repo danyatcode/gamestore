@@ -7,8 +7,7 @@ import { List, State } from '../redux/constants/types';
 import { useParams } from 'react-router-dom';
 import { RiComputerLine } from 'react-icons/ri';
 import { SiPlaystation2, SiPlaystation3, SiPlaystation4, SiPlaystation5 } from 'react-icons/si';
-import ListGame from './ListGame';
-
+import ListGame from './Lists/ListChilds/ListItem';
 
 
 const Home = ({loader}: {loader: boolean}): JSX.Element => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { SelectedGame } from '../redux/constants/types'
+import { SelectedGame } from '../../../redux/constants/types'
 
 type Game = {
     gallery: JSX.Element[] | undefined,
