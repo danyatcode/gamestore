@@ -8,6 +8,13 @@ export const setGames = (games:DataProps[]) => {
     }
 }
 
+export const setQuery = (str:string) => {
+    return {
+        type: ActionTypes.SET_QUERY,
+        payload: str
+    }
+}
+
 export const removeGames = () => {
     return {
         type: ActionTypes.REMOVE_LIST,

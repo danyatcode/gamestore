@@ -86,12 +86,16 @@ body {
   opacity: 0.6;
 }
 .menu input{
-  margin-right: 100px;
   height: 20px;
   border: none;
   border-radius: 2px;
   padding: 5px 8px;
   font-size: 20px;
+  margin-right: 5px;
+}
+.search{
+  margin-right: 100px;
+  padding: 5px 8px;
 }
 #input::placeholder{
   font-size: 14px;
@@ -463,8 +467,10 @@ body {
 }
 @media (max-width: 786px) {
   #input{
-    margin-right: 30px;
     width: 150px;
+  }
+  .search{
+    margin-right: 30px;
   }
   .selected-game-image {
     max-width: 100%;

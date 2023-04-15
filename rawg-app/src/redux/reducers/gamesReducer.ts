@@ -22,6 +22,11 @@ interface SelectedGameAction extends Action{
     payload: SelectedGame
 }
 
+interface queryAction extends Action{
+    type: string,
+    payload: SelectedGame
+}
+
 
 export const gamesReducer = (state: IState = initState, action: IGamesAction) => {
     switch(action.type){
@@ -34,6 +39,13 @@ export const selectedGameReducer = (state: any = {}, {type, payload}: SelectedGa
     switch(type){
         case ActionTypes.SELECTED_GAME: return {...state, ...payload}
         case ActionTypes.REMOVE_SELECTED_GAME: return {}
+        default: return state
+    }
+}
+
+export const queryReducer = (state: any = {}, {type, payload}: queryAction) => {
+    switch(type){
+        case ActionTypes.SET_QUERY: return {...state , searchQuery: payload}
         default: return state
     }
 }

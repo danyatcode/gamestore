@@ -8,10 +8,11 @@ import { useParams } from 'react-router-dom';
 import { RiComputerLine } from 'react-icons/ri';
 import { SiPlaystation2, SiPlaystation3, SiPlaystation4, SiPlaystation5 } from 'react-icons/si';
 import ListGame from './ListGame';
+import Home from './Home';
 
 
 
-const Home = ({loader}: {loader: boolean}): JSX.Element => {
+const SearchList = (): JSX.Element => {
 
     const [totalImages, setTotalImages] = useState<number>(0);
     const [loadedImg, setLoadedImg] = useState<number>(0);
@@ -19,16 +20,17 @@ const Home = ({loader}: {loader: boolean}): JSX.Element => {
     const id = useParams();
     
     const games = useSelector<State, List>((state: State) => state.games)
+    const query = useSelector((state) => state.query.searchQuery)
 
     const dispatch = useDispatch();
 
     const handleImageLoad = () => {
         setLoadedImg((prevCount) => prevCount + 1);
     }
-
     const fetchData = async() => {
         try{
-            const res = await axios.get("https://api.rawg.io/api/games?key=242593db55b54d9089bab37814ec14a4&page=4&page_size=20") as AxiosResponse;    
+            const res = await axios.get("https://api.rawg.io/api/games?search="+query+"&key=242593db55b54d9089bab37814ec14a4") as AxiosResponse;    
+            console.log(res)
             const data = res.data;
 
             dispatch(setGames(data));
@@ -40,22 +42,26 @@ const Home = ({loader}: {loader: boolean}): JSX.Element => {
     }
     React.useEffect(() => {
         
-        fetchData(); 
+        fetchData();
         return () => {
             dispatch(removeGames())
         }
     }, [])
-    
+    React.useEffect(() => {
+        fetchData();
+        return () => {
+            dispatch(removeGames())
+        }
+    }, [query])
     React.useEffect(() => {
         return(
             setLoadedImg(0)
         )
     }, [id])
-    
-  return (
-    <div className='item-list'>
+    console.log(games, query)
+  return <div className='item-list'>
 
-      { loader && loadedImg !== totalImages && <div className="loading"><div className='loader'></div></div>}
+      {/* {loadedImg !== totalImages && <div className="loading"><div className='loader'></div></div>} */}
       
       {games?.list?.map( (game) =>{ 
            
@@ -86,7 +92,6 @@ const Home = ({loader}: {loader: boolean}): JSX.Element => {
         }
 
     </div>
-  )
 }
 
-export default Home
+export default SearchList
