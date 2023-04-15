@@ -7,7 +7,7 @@ export type DataProps = {
     rating: number,
     genres: Genre[],
     platforms: Platform[],
-    short_screenshots: Screeshot[]
+    image: string
 }
 
 export type State = {
@@ -17,6 +17,9 @@ export type State = {
 
 export type List = {
     list: DataProps[] 
+}
+export type GenreList = {
+    list: games[]
 }
 
 export type SelectedGame = {
@@ -33,6 +36,10 @@ export type SelectedGame = {
 
 type Developer = {
     name: string
+}
+type games = {
+    name: string,
+    id: number
 }
 
 interface Screeshot{

@@ -15,10 +15,10 @@ type Game = {
 
 
 const Game = ({store, game, genres, developers, platforms, gallery, handleImageLoad, loadedImg, totalImages}: Game):JSX.Element => {
-    
+    // console.log(gallery)
   return (
     <div className='game'>
-
+        
         {loadedImg !== totalImages && <div className="loading"><div className='loader'></div></div>}
 
         <div className='row'>

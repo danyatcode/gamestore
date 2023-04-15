@@ -39,10 +39,10 @@ const SelectedGame = ():JSX.Element => {
     }
     const fetchSecondData = async() => {
         try{
-            const res = await axios.get(`https://api.rawg.io/api/games?key=242593db55b54d9089bab37814ec14a4&page=4&page_size=20`) as AxiosResponse;    
+            const res = await axios.get(`https://api.rawg.io/api/games/${gameID}/screenshots?key=242593db55b54d9089bab37814ec14a4`) as AxiosResponse;    
             const data = res.data;
             setGamesData(data.results);
-            setTotalImages(data.results[0].short_screenshots.length + 1);
+            setTotalImages(data.results.length + 1);
         } catch(error){
             console.error(error)
         }
@@ -53,11 +53,12 @@ const SelectedGame = ():JSX.Element => {
             fetchSecondData()
         }; 
         return () => {
+            setLoadedImg(0)
             dispatch(removeSelectedGame())
         }
     }, [gameID])
 
-    const gallery = gamesData?.filter(res => res.name === game.name)[0]?.short_screenshots?.map( (screenshot, i) => <a key={i} href={screenshot.image} target="value">
+    const gallery = gamesData?.map( (screenshot, i) => <a key={i} href={screenshot.image} target="value">
         <img  src={screenshot.image} alt="game screenshot" onLoad={handleImageLoad}/>
     </a>);
 
@@ -73,7 +74,7 @@ const SelectedGame = ():JSX.Element => {
         }
         descr += descriptArray[i];
     }
-
+    
     if(descr)document.getElementsByClassName('selected-game-descr')[0].innerHTML = descr;
 
     const platforms = game?.platforms?.map( (platforms, i) => {
@@ -96,7 +97,7 @@ const SelectedGame = ():JSX.Element => {
             case "xbox360": return <a className='store-links' href={'https://' + store.store.domain} key={i} target='value'><BsNintendoSwitch /></a>
         }
     });
-
+    
   return (
     <Game 
         store={store} 

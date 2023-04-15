@@ -1,5 +1,5 @@
 import { ActionTypes } from "../constants/action-types";
-import { DataProps, SelectedGame } from "../constants/types";
+import { DataProps } from "../constants/types";
 
 export const setGames = (games:DataProps[]) => {
     return {
@@ -7,6 +7,13 @@ export const setGames = (games:DataProps[]) => {
         payload: games
     }
 }
+
+export const removeGames = () => {
+    return {
+        type: ActionTypes.REMOVE_LIST,
+    }
+}
+
 export const selectedGame = (game:DataProps) => {
     return {
         type: ActionTypes.SELECTED_GAME,

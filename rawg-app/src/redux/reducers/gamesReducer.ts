@@ -26,6 +26,7 @@ interface SelectedGameAction extends Action{
 export const gamesReducer = (state: IState = initState, action: IGamesAction) => {
     switch(action.type){
         case ActionTypes.SET_LIST: return {...state, list: [...action.payload.results]}
+        case ActionTypes.REMOVE_LIST: return {}
         default: return state
     }
 }

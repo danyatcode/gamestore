@@ -1,7 +1,7 @@
 import { Route, HashRouter, Routes } from "react-router-dom"
 import Header from "./components/Header"
 import Home from "./components/Home"
-import Games from "./components/Games"
+import GamesList from "./components/GamesList"
 import SelectedGame from "./components/SelectedGame"
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />}/>
-          <Route path="/games" element={<Games />}/>
+          <Route path="/games/genre/:genreID" element={<GamesList />}/>
           <Route path="/game/:gameID" element={<SelectedGame />} />
         </Routes>
       </HashRouter>

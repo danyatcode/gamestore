@@ -1,23 +1,21 @@
-import axios, {AxiosResponse} from 'axios';
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { removeGames, setGames } from '../redux/actions/game-actions';
-import { BsNintendoSwitch, BsXbox } from 'react-icons/bs'
+import axios, { AxiosResponse } from 'axios';
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router'
 import { List, State } from '../redux/constants/types';
-import { useParams } from 'react-router-dom';
-import { RiComputerLine } from 'react-icons/ri';
+import { removeGames, setGames } from '../redux/actions/game-actions';
 import { SiPlaystation2, SiPlaystation3, SiPlaystation4, SiPlaystation5 } from 'react-icons/si';
+import { RiComputerLine } from 'react-icons/ri';
+import { BsNintendoSwitch, BsXbox } from 'react-icons/bs';
 import ListGame from './ListGame';
 
+const Games = () => {
 
+  const id = useParams().genreID;
 
-const Home = (): JSX.Element => {
+    const [totalImages, setTotalImages] = React.useState<number>(0);
+    const [loadedImg, setLoadedImg] = React.useState<number>(0);
 
-    const [totalImages, setTotalImages] = useState<number>(0);
-    const [loadedImg, setLoadedImg] = useState<number>(0);
-
-    const id = useParams();
-    
     const games = useSelector<State, List>((state: State) => state.games)
 
     const dispatch = useDispatch();
@@ -28,38 +26,38 @@ const Home = (): JSX.Element => {
 
     const fetchData = async() => {
         try{
-            const res = await axios.get("https://api.rawg.io/api/games?key=242593db55b54d9089bab37814ec14a4&page=4&page_size=20") as AxiosResponse;    
+            const res = await axios.get(`https://api.rawg.io/api/games?genres=${id}&key=242593db55b54d9089bab37814ec14a4`) as AxiosResponse;    
             const data = res.data;
 
             dispatch(setGames(data));
 
-            setTotalImages(data.results.length );
+            setTotalImages(data.results.length);
         } catch(error){
             console.error(error)
         }
     }
+
     React.useEffect(() => {
-        
-        fetchData(); 
-        return () => {
-            dispatch(removeGames())
+        if(id &&id !== '') {
+            fetchData() 
+            dispatch(removeGames()) 
         }
-    }, [])
-    
-    React.useEffect(() => {
-        return(
+        return (
             setLoadedImg(0)
         )
     }, [id])
-    
+
   return (
     <div className='item-list'>
 
-      {loadedImg !== totalImages && <div className="loading"><div className='loader'></div></div>}
+      {
+        loadedImg !== totalImages && 
+        <div className="loading"><div className='loader'></div></div>
+      }
       
       {games?.list?.map( (game) =>{ 
            
-            const genres = game.genres.map( genre => genre.name);
+            const genres = game?.genres?.map( genre => genre.name);
 
             const platforms = game?.platforms?.map( (platforms, i) => {
                 switch(platforms.platform.slug){
@@ -89,4 +87,4 @@ const Home = (): JSX.Element => {
   )
 }
 
-export default Home
+export default Games
