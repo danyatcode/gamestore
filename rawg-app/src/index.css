@@ -504,9 +504,19 @@ body {
   .menu{
     margin: 0;
     align-items: center;
+    padding-left: 5px;
+  }
+  .selected-game-store{
+    flex-direction: column;
   }
   .link{
     font-size: 12px;
+  }
+  #root {
+    padding: 5px;
+  }
+  .selected-game-info{
+    padding-left: 5px;
   }
   .item{
     gap: 0px; 

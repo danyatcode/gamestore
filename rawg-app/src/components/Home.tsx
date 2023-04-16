@@ -16,7 +16,7 @@ const Home = ({loader}: {loader: boolean}): JSX.Element => {
     const [loadedImg, setLoadedImg] = useState<number>(0);
 
     const id = useParams();
-    
+    console.log(loadedImg, totalImages)
     const games = useSelector<State, List>((state: State) => state.games)
 
     const dispatch = useDispatch();
