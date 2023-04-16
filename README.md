@@ -23,4 +23,5 @@ The website is written in TypeScript for type checking and better code organizat
 - React Icons
 - Vite
 - TypeScript
+
 Link: [Website](https://danyatcode.github.io/gamestore/)
