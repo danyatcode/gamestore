@@ -13,7 +13,7 @@ Also used React Router for routing,
 React Icons for adding icons to the UI, 
 and Vite for fast development and bundling. 
 
-
+# Images from the API have insane size 🥴
 
 ### Tools & Technologies:
 
