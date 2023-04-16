@@ -24,4 +24,4 @@ The website is written in TypeScript for type checking and better code organizat
 - Vite
 - TypeScript
 
-Link: [Website](https://danyatcode.github.io/gamestore/)
+### Link: [Website](https://danyatcode.github.io/gamestore/)
